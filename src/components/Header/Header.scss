@@ -1,0 +1,17 @@
+.header {
+  background-color: black;
+  color: white;
+  height: 7%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+.header__img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+}

@@ -1,12 +1,19 @@
 import { TypesAction } from "./enums"
 
+export type NoteType = {
+  text: string;
+  id: number;
+}
+
 export type StateType = {
-  value: string;
+  newNotesText: string;
+  notes: NoteType[];
+  modal: boolean;
 }
 
 export type ActionType = {
-  type: TypesAction.changeMessage;
-  payload: string;
+  type: TypesAction.updateNotesText | TypesAction.addNewNotes | TypesAction.removeNotes | TypesAction.editNotes | TypesAction.showModal | TypesAction.closeModal;
+  payload?: string;
 }
 
 export type SubcriberFunction = (state: StateType) => void;
@@ -21,4 +28,4 @@ export type StoreType = {
   dispatch: (action: ActionType) => void;
 }
 
-
+export type ContainerType = {store: StoreType};

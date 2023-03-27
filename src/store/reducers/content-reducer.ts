@@ -1,11 +1,14 @@
 import { TypesAction } from "../enums";
 import {ActionType, ContentType, INewNote, INote } from "../types";
-
+const removeDuplicates = (arr: string[]) =>{
+  const mySet = new Set(arr);
+  return Array.from(mySet);
+}
 
 const getTags = (text:string): string[] =>{
-  const pattern = /#(\w+)/gi;
+  const pattern = /#(\w+)/g;
   const match = text.match(pattern);
-  return match && match.length ? match : [];
+  return match && match.length ? removeDuplicates(match) : [];
 }
 
 const initialCurrentNoteState: INote = {

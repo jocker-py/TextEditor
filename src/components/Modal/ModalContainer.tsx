@@ -8,7 +8,6 @@ import {addNewNotesActionCreator,
   updateNotesTextActionCreator} from '../../store/store';
 import { ContainerType } from '../../store/types';
 import Modal from './Modal';
-import './ModalContainer.scss';
 
 const ModalContainer: FC<ContainerType> = ({store}) => {
   const state = store.getState();

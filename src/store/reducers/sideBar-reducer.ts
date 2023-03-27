@@ -22,6 +22,9 @@ const sideBarReducer: SideBarReducerType = (state = initialSideBarState, action,
         state.selectedTags = [...state.selectedTags, currentTag];
       }
       return state
+    case TypesAction.resetFilter:
+      state.selectedTags = Object.assign([]);
+      return state
     default:
       return state;
   }

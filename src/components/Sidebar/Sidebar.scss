@@ -1,19 +1,26 @@
 .sidebar {
+  @include flex(column, flex-start);
   width: 20%;
   height: 86%;
-  background-color: antiquewhite;
+  background-color: $green;
   padding: 20px;
-}
-
-.sidebar__tag--selected {
-  display: inline-block;
-  background-color: blue;
-  padding: 5px;
-  border: 1px solid black;
 }
 
 .sidebar__tag {
   display: inline-block;
-  background-color: gray;
+  background-color: $cream;
   padding: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+  &--selected {
+    background-color: $orange;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.sidebar__button {
+  @include icon('https://img.icons8.com/ios/256/restart.png', $pink, 100px, 30px);
+  margin-top: 20px;
 }

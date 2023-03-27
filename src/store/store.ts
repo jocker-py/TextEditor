@@ -102,11 +102,19 @@ export const removeNoteActionCreator : RemoveNoteActionCreatorType = () => {
     type: TypesAction.removeNote
   }
 }
+
 type ToggleTagActionCreator = (tag:string) => ActionType;
 export const toggleTagActionCreator : ToggleTagActionCreator = (tag) => {
   return {
     type: TypesAction.toggleTag,
     payload: tag,
+  }
+}
+
+type ResetFilterActionCreatorType = () => ActionType;
+export const resetFilterActionCreator : ResetFilterActionCreatorType = () => {
+  return {
+    type: TypesAction.resetFilter
   }
 }
 

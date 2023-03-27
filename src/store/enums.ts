@@ -10,6 +10,7 @@ export enum TypesAction {
   updateNote = 'UPDATE-NOTE',
   removeNote = 'REMOVE-NOTE',
   toggleTag = 'TOGGLE-TAG',
+  resetFilter = 'RESET-FILTER',
 };
 
 export enum ModalTitle {

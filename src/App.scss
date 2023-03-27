@@ -1,14 +1,64 @@
 * {
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Lato', sans-serif;
 }
 
+$orange: #f6bd60;
+$cream: #f7ede2;
+$pink: #f5cac3;
+$green: #84a59d;
+$koral: #f28482;
+$darkgreen: #46544f;
+$lightgreen: #a3b18a;
+
+@mixin flex($d: row,$j:center, $a: center, $w: no-wrap, $g: 0) {
+  display: flex;
+  flex-direction: $d;
+  justify-content: $j;
+  align-items: $a;
+  flex-wrap: $w;
+  gap: $g;
+}
+
+@mixin icon($p, $c:$koral, $w: 30px, $h: 30px, $bsw: 20px, $bsh: 20px){
+  background-color: $c;
+  background-image: url($p);
+  object-fit: cover;
+  width: $w;
+  height: $h;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: $bsw $bsh;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+
 .App {
+  @include flex($a: stretch, $w: wrap);
   width: 100%;
   height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
+}
 
+
+@import './components/Content/Content.scss';
+@import './components/Footer/Footer.scss';
+@import './components/Header/Header.scss';
+@import './components/Modal/ModalContainer';
+@import './components/Sidebar/Sidebar.scss';
+
+
+/* lato-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/font/lato-v23-latin-regular.woff2') format('woff2');/* Chrome 36+, Opera 23+, Firefox 39+ */
+  src: url('./assets/font/lato-v23-latin-regular.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }

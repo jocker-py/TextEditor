@@ -55,10 +55,10 @@ const Modal: FC<ModalType> = ({title, value,  tags, addNotes, showModal,
      <h3 className="modal__title">{title}</h3>
       {readOnly ?  textElement : textAreaElements}
       <div className="modal__buttons">
-        {confirmButton && <button className="modal__button-confirm" onClick={addNote}>Confirm</button>}
-        {editButton && <button className="modal__button-edit" onClick={onEditNote}>Edit</button>}
-        {removeButton && <button className="modal__button-remove" onClick={onRemoveNote}>Remove</button>}
-        {cancelButton && <button className="modal__button-cancel" onClick={onCloseModal}>Cancel</button>}
+        {confirmButton && <button className="modal__button-confirm" onClick={addNote}/>}
+        {editButton && <button className="modal__button-edit" onClick={onEditNote}/>}
+        {removeButton && <button className="modal__button-remove" onClick={onRemoveNote}/>}
+        {cancelButton && <button className="modal__button-cancel" onClick={onCloseModal}/>}
       </div>
     </div>
   );

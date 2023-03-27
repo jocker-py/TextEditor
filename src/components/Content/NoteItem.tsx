@@ -19,14 +19,26 @@ const NoteItem: FC<NoteItemType> = (props) => {
     e.stopPropagation();
     props.removeNote(props.note);
   }
+  const tagElements = <div>
+    {props.note.tags.map((tag, idx) => <span className="content__tag-item" key={idx}> {tag} </span>)}
+  </div>
+  const textElement = props.note.text.replace(/(#(\w+))/g, '$1#');
+  const result = textElement.split('#').map((item,idx) => {
+    if(idx % 2 !== 0){
+      return <span className="blue">{`#${item}`}</span>
+    } else {
+      return <span>{item}</span>
+    }
+  })
   return (
-    <div onClick={showNoteItem} id={props.note.id.toString()}>
-      <div>Text - {props.note.text}</div>
-      <div>Tags - {
-        props.note.tags.map((tag, idx) => <span key={idx}> {tag} </span>)
-      }
-      <button onClick={showEditNoteItem}>Edit</button>
-        <button onClick={removeNote}>Remove</button>
+    <div onClick={showNoteItem} id={props.note.id.toString()} className="content__item">
+      <div>{result}</div>
+      <div className="content__tag-list">
+        {tagElements}
+      </div>
+      <div className="content__buttons">
+        <button className="content__button--edit" onClick={showEditNoteItem}/>
+        <button className="content__button--remove" onClick={removeNote}/>
       </div>
     </div>
   );

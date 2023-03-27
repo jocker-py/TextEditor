@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { INote } from '../../store/types';
-import './Content.scss';
 import NoteItem from './NoteItem';
 
 type ContentType = {
@@ -21,10 +20,10 @@ const Content: FC<ContentType> = ({notes,
               showModalEditNoteItem={showModalEditNoteItem}
               removeNote={removeNote}
     />);
-  const phrase = <div>List is empty</div>
+  const phrase = <h2 className='content__empty'>List is empty</h2>
   return (
     <div className="content">
-      <button onClick={showModalAddNotes}>Add Note</button>
+      <button className="content__button--add"onClick={showModalAddNotes}/>
       {notesElements.length ? notesElements : phrase}
     </div>
   );

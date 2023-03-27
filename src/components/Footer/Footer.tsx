@@ -1,10 +1,12 @@
 import React from 'react';
-import './Footer.scss';
 
 const Footer = () => {
   return (
     <div className="footer">
-      Footer
+      <div>
+        created by Buladzislau
+      </div>
+      <a  className="footer__link"href="https://github.com/jocker-py"/>
     </div>
   );
 };

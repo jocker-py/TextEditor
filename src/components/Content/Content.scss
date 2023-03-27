@@ -1,16 +1,59 @@
 .content {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   gap: 10px;
   padding: 20px;
   width: 80%;
   height: 86%;
+  background-color: $cream;
 }
 
 .content__item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: lightgoldenrodyellow;
+  @include flex(column, space-around, stretch, wrap, 10px);
+  background-color: $orange;
+  padding: 20px;
+  border-radius: 20px;
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.content__tag-list {
+  @include flex(row, flex-start, stretch, wrap);
+}
+
+
+.content__tag-item {
+  display: inline-block;
+  color: blue;
+  padding: 2px;
+  margin-right: 5px;
+  background-color: $green;
+  border-radius: 5px;
+  font-size: 80%;
+}
+
+
+.content__buttons {
+  @include flex($j: space-around, $a: flex-end);
+}
+
+.content__button{
+  &--add{
+    @include icon('https://img.icons8.com/ios/256/plus-2-math.png', rgba($orange, 0.3), 100%, 100%);
+    &:hover {
+      background-color: rgba($orange, 0.8);
+    }
+  }
+  &--remove{
+    @include icon('https://img.icons8.com/ios/256/trash.png');
+  }
+  &--edit {
+    @include icon('https://img.icons8.com/ios-glyphs/256/pencil.png', $green);
+  }
+}
+
+.blue {
+  color: blue;
 }

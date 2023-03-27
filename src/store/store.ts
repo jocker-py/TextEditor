@@ -1,15 +1,21 @@
 import { TypesAction } from "./enums";
-import {ActionType, StoreType } from "./types";
+import contentReducer, {initialContentState} from "./reducers/content-reducer";
+import modalReducer, { initialModalState } from "./reducers/modal-reducer";
+import sideBarReducer, { initialSideBarState } from "./reducers/sideBar-reducer";
+import {ActionType, StoreType, INote } from "./types";
 
 const store: StoreType  = {
   _state: {
-    newNotesText: '',
-    notes : [],
-    modal : true,
+    content : {...initialContentState},
+    modal : {...initialModalState},
+    sideBar: {...initialSideBarState},
   },
   _subscriber: null,
   getState (){
     return this._state
+  },
+  getNotes(){
+    return this._state.content.notes;
   },
   setSubscriber(subscriber){
     this._subscriber = subscriber;
@@ -18,20 +24,9 @@ const store: StoreType  = {
     this._subscriber && this._subscriber(this._state);
   },
   dispatch(action){
-    if(action.type === TypesAction.updateNotesText){
-      this._state.newNotesText = action.payload || '';
-    } else if(action.type === TypesAction.addNewNotes){
-      const newNotes = {
-        id: this._state.notes.length + 1, // TODO: edit this later
-        text: this._state.newNotesText
-      }
-      this._state.newNotesText = '';
-      this._state.notes = [...this._state.notes, newNotes];
-    } else if(action.type === TypesAction.showModal){
-      this._state.modal = true;
-    } else if(action.type === TypesAction.closeModal){
-      this._state.modal = false;
-    }
+    this._state.content = contentReducer(this._state.content, action);
+    this._state.modal = modalReducer(this._state.modal, action);
+    this._state.sideBar = sideBarReducer(this._state.sideBar, action, this.getNotes());
     this._callSubscriber(this._state);
   }
 };
@@ -62,6 +57,55 @@ type CloseModalActionCreatorType = () => ActionType;
 export const closeModalActionCreator: CloseModalActionCreatorType = () => {
   return {
     type: TypesAction.closeModal
+  }
+}
+
+type ShowModalAddNotesActionCreatorType = () => ActionType;
+export const showModalAddNotesActionCreator: ShowModalAddNotesActionCreatorType = () => {
+  return {
+    type: TypesAction.showAddNotesModal
+  }
+}
+
+type SetNoteActionCreatorType = (note: INote) => ActionType;
+export const setNoteActionCreator: SetNoteActionCreatorType = (note) => {
+  return {
+    type: TypesAction.setNote,
+    payload: {...note}
+  }
+}
+
+type ShowNoteActionCreatorType = () => ActionType;
+export const showNoteActionCreator: ShowNoteActionCreatorType = () => {
+  return {
+    type: TypesAction.showNote,
+  }
+}
+
+type EditNoteActionCreatorType = () => ActionType;
+export const editNoteActionCreator: EditNoteActionCreatorType = () => {
+  return {
+    type: TypesAction.editNote
+  }
+}
+
+type UpdateNoteActionCreatorType = () => ActionType;
+export const updateNoteActionCreator : UpdateNoteActionCreatorType = () => {
+  return {
+    type: TypesAction.updateNote
+  }
+}
+
+type RemoveNoteActionCreatorType = () => ActionType;
+export const removeNoteActionCreator : RemoveNoteActionCreatorType = () => {
+  return {
+    type: TypesAction.removeNote
+  }
+}
+type ToggleTagActionCreator = () => ActionType;
+export const toggleTagActionCreator : ToggleTagActionCreator = () => {
+  return {
+    type: TypesAction.toggleTag
   }
 }
 

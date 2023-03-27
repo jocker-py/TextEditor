@@ -12,9 +12,15 @@ type SideBarReducerType = (state: SideBarType, action: ActionType, notes: INote[
 const sideBarReducer: SideBarReducerType = (state = initialSideBarState, action, notes) => {
   const totalTags = notes.map(note => note.tags);
   const uniqueTags = Array.from(new Set(totalTags.flat()));
-  state.tags = uniqueTags;
+  state.tags = [...uniqueTags];
   switch (action.type){
     case TypesAction.toggleTag:
+      const currentTag = action.payload as string;
+      if(state.selectedTags.includes(currentTag)){
+        state.selectedTags = [...state.selectedTags.filter(tag => tag !== currentTag)];
+      } else {
+        state.selectedTags = [...state.selectedTags, currentTag];
+      }
       return state
     default:
       return state;

@@ -21,10 +21,11 @@ const Content: FC<ContentType> = ({notes,
               showModalEditNoteItem={showModalEditNoteItem}
               removeNote={removeNote}
     />);
+  const phrase = <div>List is empty</div>
   return (
     <div className="content">
       <button onClick={showModalAddNotes}>Add Note</button>
-      {notesElements}
+      {notesElements.length ? notesElements : phrase}
     </div>
   );
 };

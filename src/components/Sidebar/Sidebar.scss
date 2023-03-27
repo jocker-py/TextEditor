@@ -4,3 +4,16 @@
   background-color: antiquewhite;
   padding: 20px;
 }
+
+.sidebar__tag--selected {
+  display: inline-block;
+  background-color: blue;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.sidebar__tag {
+  display: inline-block;
+  background-color: gray;
+  padding: 5px;
+}

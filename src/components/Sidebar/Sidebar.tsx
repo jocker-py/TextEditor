@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
+import { toggleTagActionCreator } from '../../store/store';
 import { ContainerType } from '../../store/types';
 import './Sidebar.scss';
 
 const Sidebar: FC<ContainerType> = (props) => {
   const state = props.store.getState().sideBar;
   const dispatch = props.store.dispatch.bind(props.store);
+
   const toggleTag = (e: React.MouseEvent) =>{
     const text = e.currentTarget.innerHTML;
-    dispatch(toggleTagsActionCreator(text));
+    dispatch(toggleTagActionCreator(text));
   }
   const tagsElements = [...state.tags].map((tag, idx) => {
         if(state.selectedTags.includes(tag)){
-          return (<div onClick={toggleTag}>{tag}</div>)
+          return (<div key={idx} className="sidebar__tag--selected" onClick={toggleTag}>{tag}</div>)
         } else {
-          return <div onClick={toggleTag}>{tag}</div>
+          return <div key={idx} className="sidebar__tag" onClick={toggleTag}>{tag}</div>
         }
       });
   debugger;
@@ -38,7 +40,3 @@ const Sidebar: FC<ContainerType> = (props) => {
 };
 
 export default Sidebar;
-
-function toggleTagsActionCreator(text: string): import("../../store/types").ActionType {
-    throw new Error('Function not implemented.');
-}

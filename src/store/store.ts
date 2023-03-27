@@ -102,10 +102,11 @@ export const removeNoteActionCreator : RemoveNoteActionCreatorType = () => {
     type: TypesAction.removeNote
   }
 }
-type ToggleTagActionCreator = () => ActionType;
-export const toggleTagActionCreator : ToggleTagActionCreator = () => {
+type ToggleTagActionCreator = (tag:string) => ActionType;
+export const toggleTagActionCreator : ToggleTagActionCreator = (tag) => {
   return {
-    type: TypesAction.toggleTag
+    type: TypesAction.toggleTag,
+    payload: tag,
   }
 }
 

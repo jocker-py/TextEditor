@@ -8,7 +8,15 @@ import Content from './Content';
 
 const ContentContainer: FC<ContainerType> = (props) => {
   const state = props.store.getState().content;
+  const selectedTags = props.store.getState().sideBar.selectedTags;
   const dispatch = props.store.dispatch.bind(props.store);
+  const isContainSomeTag = (arr: string[]) => {
+    return arr.some(arg => selectedTags.includes(arg));
+  };
+  const getFilteredNotes = () => {
+    return state.notes.filter(note => isContainSomeTag(note.tags));
+  }
+  const filteredNotes = selectedTags.length ? getFilteredNotes() : state.notes;
   const showModalAddNotes = () => {
     dispatch(showModalAddNotesActionCreator());
   }
@@ -26,7 +34,7 @@ const ContentContainer: FC<ContainerType> = (props) => {
   }
   return (
       <Content
-        notes={state.notes}
+        notes={filteredNotes}
         showModalNote={showModalNote}
         showModalAddNotes={showModalAddNotes}
         showModalEditNoteItem={showModalEditNoteItem}

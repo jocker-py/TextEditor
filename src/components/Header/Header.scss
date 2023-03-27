@@ -1,12 +1,9 @@
 .header {
-  background-color: black;
+  @include flex($j: flex-start, $g:15px );
+  background-color: $darkgreen;
   color: white;
   height: 7%;
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 15px;
   padding: 20px;
 }
 

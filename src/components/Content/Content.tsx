@@ -1,23 +1,30 @@
 import React, { FC } from 'react';
-import { NoteType } from '../../store/types';
+import { INote } from '../../store/types';
 import './Content.scss';
+import NoteItem from './NoteItem';
 
-type ContentType = {value: string, notes:NoteType[] , onUpadteNotesText: (text: string) => void, addNotes : () => void};
-const Content: FC<ContentType> = ({value, notes, onUpadteNotesText, addNotes}) => {
-  const notesElements = notes.map((note) => <div key={note.id}>{note.text}</div>);
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    let text = e.currentTarget.value;
-    onUpadteNotesText(text);
-  }
+type ContentType = {
+  notes:INote[],
+  showModalAddNotes:() => void,
+  showModalNote:(note:INote) => void;
+  showModalEditNoteItem:(note: INote) => void
+  removeNote: (note: INote) => void
+}
+const Content: FC<ContentType> = ({notes,
+                                    showModalAddNotes,
+                                    showModalNote,
+                                    showModalEditNoteItem,
+                                    removeNote}) => {
+  const notesElements = notes.map((note) =>
+    <NoteItem key={note.id} note={note}
+              showModalNote={showModalNote}
+              showModalEditNoteItem={showModalEditNoteItem}
+              removeNote={removeNote}
+    />);
   return (
     <div className="content">
-      <div>
-        <textarea value={value} onChange={onChange} placeholder="Enter your note..."/>
-      </div>
-      <div>
-        <button onClick={addNotes}>add Note</button>
-      </div>
-      <div>{notesElements}</div>
+      <button onClick={showModalAddNotes}>Add Note</button>
+      {notesElements}
     </div>
   );
 };

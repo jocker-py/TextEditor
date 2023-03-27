@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import './App.scss';
 import ContentContainer from './components/Content/ContentContainer';
 import Footer from './components/Footer/Footer';
@@ -14,7 +14,7 @@ function App(props: AppPropsType) {
       <Header/>
       <ModalContainer store={props.store}/>
       <ContentContainer store={props.store}/>
-      <Sidebar/>
+      <Sidebar store={props.store}/>
       <Footer/>
     </div>
   );

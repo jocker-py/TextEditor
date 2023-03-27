@@ -1,19 +1,45 @@
-import { TypesAction } from "./enums"
+import {ModalTitle, TypesAction } from "./enums"
 
-export type NoteType = {
+export interface INewNote  {
   text: string;
+  tags: string[];
+}
+
+export interface INote extends INewNote {
   id: number;
 }
 
+export interface IModal {
+  toShow: boolean;
+  title: ModalTitle | '';
+  readOnly: boolean;
+  confirmButton: boolean;
+  cancelButton: boolean;
+  editButton: boolean;
+  removeButton: boolean;
+}
+
 export type StateType = {
-  newNotesText: string;
-  notes: NoteType[];
-  modal: boolean;
+  modal: IModal;
+  content: ContentType;
+  sideBar: SideBarType;
+}
+
+export type ContentType = {
+  notes: INote[];
+  currentNote: INote;
+  newNote: INewNote;
+}
+
+export type SideBarType = {
+  value: string,
+  selectedTags: string[],
+  tags: string[],
 }
 
 export type ActionType = {
-  type: TypesAction.updateNotesText | TypesAction.addNewNotes | TypesAction.removeNotes | TypesAction.editNotes | TypesAction.showModal | TypesAction.closeModal;
-  payload?: string;
+  type: TypesAction;
+  payload?: string | INote;
 }
 
 export type SubcriberFunction = (state: StateType) => void;
@@ -25,6 +51,7 @@ export type StoreType = {
   _callSubscriber: SubcriberFunction;
   setSubscriber: (subscriber: SubcriberType) => void;
   getState: () => StateType;
+  getNotes: () => INote[];
   dispatch: (action: ActionType) => void;
 }
 
